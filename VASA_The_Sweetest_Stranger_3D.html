@@ -30401,21 +30401,11 @@ void main() {
     const capTopColor = new TextureLoader().load(cap_top_default);
     capTopColor.colorSpace = SRGBColorSpace;
     capTopColor.anisotropy = 8;
-    const capTopRelief = new TextureLoader().load(cap_top_default);
-    capTopRelief.colorSpace = NoColorSpace;
-    capTopRelief.anisotropy = 8;
     const capTop = new Mesh(
       new CircleGeometry(0.589, 128),
-      new MeshPhysicalMaterial({
-        map: capTopColor,
-        bumpMap: capTopRelief,
-        color: 11568240,
-        bumpScale: 8e-3,
-        roughness: 0.68,
-        metalness: 0,
-        clearcoat: 0.06,
-        clearcoatRoughness: 0.8
-      })
+      // The reference itself already records the recess and wood highlights.
+      // Show those photographed tones directly instead of lighting them twice.
+      new MeshBasicMaterial({ map: capTopColor, toneMapped: false })
     );
     capTop.rotation.x = -Math.PI / 2;
     capTop.position.y = 0.815;

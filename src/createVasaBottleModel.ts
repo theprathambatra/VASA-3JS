@@ -115,14 +115,11 @@ export function createVasaBottleModel() {
   const capTopColor = new THREE.TextureLoader().load(capTopImage);
   capTopColor.colorSpace = THREE.SRGBColorSpace;
   capTopColor.anisotropy = 8;
-  const capTopRelief = new THREE.TextureLoader().load(capTopImage);
-  capTopRelief.colorSpace = THREE.NoColorSpace;
-  capTopRelief.anisotropy = 8;
   const capTop = new THREE.Mesh(
     new THREE.CircleGeometry(0.589, 128),
-    new THREE.MeshPhysicalMaterial({ map: capTopColor, bumpMap: capTopRelief,
-      color: 0xb08470, bumpScale: 0.008, roughness: 0.68, metalness: 0, clearcoat: 0.06,
-      clearcoatRoughness: 0.8 }),
+    // The reference itself already records the recess and wood highlights.
+    // Show those photographed tones directly instead of lighting them twice.
+    new THREE.MeshBasicMaterial({ map: capTopColor, toneMapped: false }),
   );
   capTop.rotation.x = -Math.PI / 2;
   capTop.position.y = 0.815;
