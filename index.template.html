@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f9f7f4">
+<title>VASA | The Sweetest Stranger · Three.js study</title>
+<style>
+  :root{color-scheme:light;--ink:#302b29;--muted:#827671;--line:#ddd6d1;--accent:#bd7180}
+  *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden}
+  body{font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:radial-gradient(circle at 57% 46%,#fff 0%,#fffaf7 50%,#f7f3ed 100%)}
+  #viewer{position:absolute;inset:0;display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+  #viewer:active{cursor:grabbing}
+  .top{position:absolute;left:4.3%;right:4.3%;top:29px;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
+  .brand{font:italic 38px/1 Georgia,'Times New Roman',serif;letter-spacing:-.06em}
+  .topright,.eyebrow,.micro,.index{font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:600}
+  .topright{color:#7e706b}.intro{position:absolute;left:5.2%;top:50%;transform:translateY(-43%);max-width:375px;pointer-events:none}
+  .eyebrow{color:var(--accent);margin:0 0 24px}.intro h1{font:400 clamp(40px,4.1vw,72px)/.98 Georgia,'Times New Roman',serif;letter-spacing:-.055em;margin:0}
+  .intro p{font-size:13px;line-height:1.65;color:var(--muted);margin:23px 0 0;max-width:270px}
+  .hairline{width:28px;height:1px;background:var(--accent);margin:29px 0 20px}.micro{font-size:9px;color:#938882;line-height:1.8}
+  .meta{position:absolute;right:4.3%;top:49%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:end;gap:8px;pointer-events:none}
+  .index{color:#a89b93}.index strong{display:block;color:#443c38;font:400 43px/1 Georgia,serif;letter-spacing:-.04em;margin:12px 0 0}
+  .bottom{position:absolute;bottom:30px;left:4.3%;right:4.3%;display:flex;align-items:end;justify-content:space-between;gap:14px}
+  .hint{font-size:10px;letter-spacing:.13em;color:#887a73;text-transform:uppercase;line-height:1.75;max-width:300px}
+  .controls{display:flex;gap:6px;flex-wrap:wrap;justify-content:end}
+  button{appearance:none;border:1px solid rgba(96,76,68,.20);border-radius:50px;background:rgba(255,255,255,.68);backdrop-filter:blur(8px);color:#574842;padding:11px 15px;font-size:11px;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+  button:hover{background:#fff;border-color:#b87985}button[aria-pressed="true"]{background:#362c29;border-color:#362c29;color:white}
+  button:focus-visible{outline:2px solid #9e5263;outline-offset:3px}
+  .footerline{position:absolute;left:4.3%;right:4.3%;bottom:89px;height:1px;background:linear-gradient(90deg,transparent,var(--line) 12%,var(--line) 88%,transparent)}
+  @media(max-width:1000px){.intro{left:4.3%;max-width:250px}.intro h1{font-size:44px}.meta{display:none}}
+  @media(max-width:700px){.top{top:18px}.brand{font-size:31px}.topright{font-size:8px}.intro{top:92px;left:5%;transform:none;max-width:100%}.eyebrow{font-size:8px;margin-bottom:9px}.intro h1{font-size:30px;line-height:1}.intro h1 br{display:none}.intro p,.intro .hairline,.intro .micro{display:none}.bottom{left:4%;right:4%;bottom:19px;display:block}.controls{justify-content:center;gap:4px}.controls button{font-size:10px;padding:10px 12px}.hint{text-align:center;max-width:none;margin-bottom:13px;font-size:9px}.footerline{display:none}}
+  @media(prefers-reduced-motion:reduce){button{transition:none}}
+</style>
+</head>
+<body>
+  <canvas id="viewer" aria-label="Interactive Three.js model of the VASA perfume bottle"></canvas>
+  <header class="top"><div class="brand">vāsā</div><div class="topright">PRODUCT OBJECT STUDY &nbsp; / &nbsp; 001</div></header>
+  <section class="intro" aria-label="Product information">
+    <p class="eyebrow">VASA / EAU DE PARFUM</p>
+    <h1>The Sweetest<br> Stranger</h1>
+    <p>A 50 ml fragrance, recreated as a turnable Three.js object from three product views.</p>
+    <div class="hairline"></div><div class="micro">GLASS &nbsp;·&nbsp; PEACH &nbsp;·&nbsp; WOOD &nbsp;·&nbsp; GOLD</div>
+  </section>
+  <aside class="meta" aria-hidden="true"><div class="index">OBJECT<br><strong>01 / 01</strong></div></aside>
+  <div class="footerline"></div>
+  <footer class="bottom">
+    <div class="hint"><span id="status">FRONT VIEW</span><br>Drag to rotate &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Click the cap</div>
+    <div class="controls" aria-label="Bottle view controls">
+      <button data-view="front" aria-pressed="true">Front</button>
+      <button data-view="side" aria-pressed="false">Side</button>
+      <button data-view="back" aria-pressed="false">Back</button>
+      <button id="spin" aria-pressed="false">Rotate</button>
+      <button id="cap" aria-pressed="false">Lift cap</button>
+    </div>
+  </footer>
+  <script>/* BUNDLED_SCENE */</script>
+</body>
+</html>
