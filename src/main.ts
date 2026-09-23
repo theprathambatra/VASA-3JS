@@ -97,7 +97,7 @@ canvas.addEventListener('click',e=>{
   const rect=canvas.getBoundingClientRect();
   pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);
   raycaster.setFromCamera(pointer,camera);
-  const hit=raycaster.intersectObjects([model.parts['tapered wooden cap']],true);
+  const hit=raycaster.intersectObjects([model.capPivot],true);
   if(hit.length)toggleCap();
 });
 

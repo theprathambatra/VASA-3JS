@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import capTopImage from './assets/cap-top.webp';
 
 /** The dimensions are proportional estimates from the three supplied views, not CAD measurements. */
 export function createVasaBottleModel() {
@@ -108,6 +109,24 @@ export function createVasaBottleModel() {
   );
   cap.castShadow = true;
   add('tapered wooden cap', cap, capPivot);
+  // The supplied top-view photograph shows a dark recessed swirl in the wood.
+  // Give the flat top its own UV surface so the photographed engraving is not
+  // stretched around the lathed side grain. Both textures travel with the cap.
+  const capTopColor = new THREE.TextureLoader().load(capTopImage);
+  capTopColor.colorSpace = THREE.SRGBColorSpace;
+  capTopColor.anisotropy = 8;
+  const capTopRelief = new THREE.TextureLoader().load(capTopImage);
+  capTopRelief.colorSpace = THREE.NoColorSpace;
+  capTopRelief.anisotropy = 8;
+  const capTop = new THREE.Mesh(
+    new THREE.CircleGeometry(0.589, 128),
+    new THREE.MeshPhysicalMaterial({ map: capTopColor, bumpMap: capTopRelief,
+      color: 0xb08470, bumpScale: 0.008, roughness: 0.68, metalness: 0, clearcoat: 0.06,
+      clearcoatRoughness: 0.8 }),
+  );
+  capTop.rotation.x = -Math.PI / 2;
+  capTop.position.y = 0.815;
+  add('engraved wooden cap top', capTop, capPivot);
   const capBottom = new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.34, 0.012, 48),
     new THREE.MeshStandardMaterial({ color: 0x603d27, roughness: 0.85 }));
   capBottom.position.y = -0.006;
