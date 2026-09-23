@@ -6,9 +6,9 @@ An interactive, procedural reconstruction of the VASA *The Sweetest Stranger* 50
 
 ## Run or edit
 
-`index.html` opens the viewer on GitHub Pages. Download `VASA_The_Sweetest_Stranger_3D.html` to run the self-contained scene offline.
+`index.html` opens the viewer when WebGL is available and shows a still preview when it is disabled. Download `VASA_The_Sweetest_Stranger_3D.html` to run the self-contained scene offline.
 
-The editable TypeScript lives in `src/`. Run `npm install` and `npm run build` to regenerate the viewer and entry page from `index.template.html`. `createVasaBottleModel()` returns a named `THREE.Group` and cap pivot that can be used in another browser-based Three.js application.
+The editable TypeScript lives in `src/`. Run `npm install` and `npm run build` to regenerate the viewer and entry page from `index.template.html` and `index.fallback.html`. `createVasaBottleModel()` returns a named `THREE.Group` and cap pivot that can be used in another browser-based Three.js application.
 
 ## Model notes
 
