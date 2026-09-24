@@ -5,6 +5,17 @@ import { createVasaIconModel } from './createVasaIconModel';
 
 const canvas = document.querySelector<HTMLCanvasElement>('#icon-viewer')!;
 const status = document.querySelector<HTMLElement>('#view-status')!;
+const fallback = document.querySelector<HTMLElement>('#icon-fallback')!;
+function showFallback(error: unknown) {
+  console.error('VASA icon: interactive view unavailable', error);
+  canvas.hidden = true;
+  fallback.hidden = false;
+  status.textContent = 'FRONT MARK PREVIEW';
+  document.querySelector<HTMLElement>('.hint')!.textContent = 'The interactive view requires WebGL.';
+  document.querySelectorAll<HTMLButtonElement>('.controls button').forEach(button => button.disabled = true);
+}
+
+try {
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -91,7 +102,6 @@ resize();
 
 const clock = new THREE.Clock();
 function frame() {
-  requestAnimationFrame(frame);
   const delta = Math.min(clock.getDelta(), 0.05);
   if (destination) {
     camera.position.lerp(destination, 1 - Math.exp(-5.2 * delta));
@@ -102,6 +112,8 @@ function frame() {
   }
   controls.update(delta);
   renderer.render(scene, camera);
+  fallback.hidden = true;
+  requestAnimationFrame(frame);
 }
 frame();
 document.addEventListener('visibilitychange', () => { if (document.hidden) controls.autoRotate = false; });
@@ -111,3 +123,6 @@ window.addEventListener('keydown', event => {
   if (event.key === '3') setView('side');
 });
 (window as unknown as { vasaIconScene: object }).vasaIconScene = { scene, camera, model, controls, setView, currentView };
+} catch (error) {
+  showFallback(error);
+}
